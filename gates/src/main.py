@@ -8,7 +8,8 @@ def main():
 
     gate = Gate(motor1, motor2)
     while True:
-        gate.open_front()
+        # gate.open_front()
+        motor2.forward()
     # gate_con = GateController(gate, None)
     # gate_con.blue_gate.close_front()
 
