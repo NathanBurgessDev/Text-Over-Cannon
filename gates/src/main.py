@@ -13,7 +13,7 @@ def main():
     gate2 = Gate(motor3, motor4)
     while True:
         gate_con = GateController(gate1, gate2)
-        gate_con.blue_gate.close_front()
+        gate_con.release_blue()
 
 if __name__ == "__main__":
     main()
