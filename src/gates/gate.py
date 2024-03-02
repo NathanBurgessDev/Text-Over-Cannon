@@ -1,4 +1,5 @@
 from gpiozero import Motor
+from time import sleep
 
 class Gate:
 
@@ -6,14 +7,22 @@ class Gate:
         self.front_motor = front_motor
         self.back_motor = back_motor
 
-    def open_front(self):
-        pass
+    def open_front(self):            
+        self.front_motor.forward()
+        sleep(5)
+        self.front_motor.stop()
 
     def close_front(self):
-        pass
+        self.front_motor.backward()
+        sleep(5)
+        self.front_motor.stop()
 
     def open_back(self):
-        pass
+        self.back_motor.forward()
+        sleep(5)
+        self.back_motor.stop()
 
     def close_back(self):
-        pass
+        self.back_motor.backward()
+        sleep(5)
+        self.back_motor.stop()

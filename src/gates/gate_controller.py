@@ -9,9 +9,18 @@ class GateController:
 
 
     def send(self, message: str) -> None:
+        # convert str to bytes
         b = message.encode()
 
-        pass
+        for byte in b:
+            for i in range(8):
+                # get each bit in byte
+                match (byte >> i) & 1:
+                    case 0:
+                        self.release_blue()
+                    case 1:
+                        self.release_green()
+                
 
     def release_blue(self):
         # Let single ball into turnstile :)
