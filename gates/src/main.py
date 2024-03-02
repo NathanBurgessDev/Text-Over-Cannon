@@ -7,8 +7,10 @@ def main():
     motor2 = Motor(5,6)
 
     gate = Gate(motor1, motor2)
-    gate_con = GateController(gate, None)
-    gate_con.blue_gate.close_front()
+    while True:
+        gate.open_front()
+    # gate_con = GateController(gate, None)
+    # gate_con.blue_gate.close_front()
 
 if __name__ == "__main__":
     main()
