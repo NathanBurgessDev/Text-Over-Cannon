@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, Query
 from models import MessageStatus
 
 
@@ -14,7 +14,16 @@ async def read_root():
 
 
 @app.post("/send")
-async def read_item(message: str):
+async def send(
+    message: str = Query(
+        ...,
+        description="The message to be sent.",
+        title="Message",
+    )
+):
+    """
+    Sends a message. Returns 503 if a message is in progress.
+    """
     if app.message_status is not None:
         raise HTTPException(status_code=503, detail="Message currently being sent")
 
@@ -24,7 +33,10 @@ async def read_item(message: str):
 
 
 @app.get("/status")
-async def get_status() -> MessageStatus:
+async def status() -> MessageStatus:
+    """
+    Gets the message status. Returns 404 if no message is being sent.
+    """
     if app.message_status is None:
         raise HTTPException(status_code=404, detail="No current status")
 
