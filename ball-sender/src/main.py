@@ -13,8 +13,8 @@ app.message_status = None
 motor1 = Motor(17, 27)
 motor2 = Motor(5, 6)
 
-motor3 = Motor(23, 24)
-motor4 = Motor(14, 15)
+motor3 = Motor(2, 3)
+motor4 = Motor(4, 14)
 
 gate1 = Gate(motor1, motor2)
 gate2 = Gate(motor3, motor4)
