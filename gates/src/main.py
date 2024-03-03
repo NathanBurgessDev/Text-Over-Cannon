@@ -14,8 +14,7 @@ def main():
 
     gate_con = GateController(gate1, gate2)
     while True:
-        # gate_con.release_blue()
-        gate1.back_motor.backward()
+        gate_con.release_blue()
 
 if __name__ == "__main__":
     main()
