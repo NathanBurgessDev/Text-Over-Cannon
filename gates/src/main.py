@@ -3,8 +3,8 @@ from gate import Gate
 from gate_controller import GateController
 
 def main():
-    motor2 = Motor(17, 22)
-    motor1 = Motor(5,6)
+    motor1 = Motor(17, 27)
+    motor2 = Motor(5,6)
 
     motor3 = Motor(23,24)
     motor4 = Motor(14,15)
