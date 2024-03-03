@@ -5,7 +5,9 @@ import numpy as np
 GREEN_BIT_VALUE = 0
 BLUE_BIT_VALUE = 1
 
-frame = cv2.imread("buffer_5.jpg")
+BALL_WIDTH = 250
+
+frame = cv2.imread("buffer_7.jpg")
 
 #TODO: create a while loop to take an iamge every 0.1 seconds
 hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV) 
@@ -13,7 +15,7 @@ hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 blurred = cv2.GaussianBlur(hsv,(7,7),0)
     
 # Threshold of blue in HSV space 
-lower_blue = np.array([60, 35, 150]) 
+lower_blue = np.array([60, 35, 140]) 
 upper_blue = np.array([180, 255, 255]) 
 
 # Threshold of green in HSV space
@@ -27,11 +29,8 @@ def main():
     # preparing the mask to overlay 
     green_mask = cv2.inRange(blurred, lower_green, upper_green) 
 
-    cv2.imshow('frame', frame) 
+    # cv2.imshow('frame', frame) 
     cv2.imshow('blue mask', blue_mask) 
-
-
- 
 
     green_contours = find_contours(green_mask)
     blue_contours = find_contours(blue_mask)
@@ -50,14 +49,24 @@ def main():
     bits = []
     
     combined_list = blue_contour_tuples + green_contour_tuples
+    xs, ys = zip(*combined_list)
     
-    while combined_list:
-        # find the minimum tuple
-        xs, _ = zip(*combined_list)
-        minx_index = xs.index(min(xs))
+    minX = min(xs)
+    maxX = max(xs)
+    minY = min(ys)
+    maxY = max(ys)
+    
+    averageY = int((minY + maxY) /2)
+    
+    for i in range(0, 7):
+        x = minX + (BALL_WIDTH* i) + (BALL_WIDTH /2)
+        x = int(x)
+        is_blue = blue_mask[averageY, x]
+        is_green = green_mask[averageY, x]
         
-        is_blue = blue_mask[combined_list[minx_index][1], combined_list[minx_index][0]]
-        is_green = green_mask[combined_list[minx_index][1], combined_list[minx_index][0]]
+        frame[averageY, x] = [255, 255, 255]
+        cv2.imshow('frame', frame) 
+        
         
         if is_blue == 255:
             bits.append(BLUE_BIT_VALUE)
@@ -65,8 +74,25 @@ def main():
             bits.append(GREEN_BIT_VALUE) 
         else:
             print("NOT BLUE OR GREEN")
+    
+    
+    
+    # while combined_list:
+    #     # find the minimum tuple
+    #     xs, _ = zip(*combined_list)
+    #     minx_index = xs.index(min(xs))
+        
+    #     is_blue = blue_mask[combined_list[minx_index][1], combined_list[minx_index][0]]
+    #     is_green = green_mask[combined_list[minx_index][1], combined_list[minx_index][0]]
+        
+    #     if is_blue == 255:
+    #         bits.append(BLUE_BIT_VALUE)
+    #     elif is_green == 255:
+    #         bits.append(GREEN_BIT_VALUE) 
+    #     else:
+    #         print("NOT BLUE OR GREEN")
            
-        del combined_list[minx_index]     
+    #     del combined_list[minx_index]     
                 
     print(bits)
     cv2.waitKey(0) 
