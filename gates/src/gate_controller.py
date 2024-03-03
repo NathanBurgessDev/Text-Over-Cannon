@@ -23,15 +23,15 @@ class GateController:
                 
 
     def release_blue(self):
-        # Let single ball into turnstile :)
-        self.blue_gate.open_back()
-        sleep(1)
-        self.blue_gate.close_back()
-
         # Let ball out of turnstile :)
         self.blue_gate.open_front()
         sleep(1)
         self.blue_gate.close_front()
+
+        # Let single ball into turnstile :)
+        self.blue_gate.open_back()
+        sleep(1)
+        self.blue_gate.close_back()
 
     def release_green(self):
         # Let single ball into turnstile :)
