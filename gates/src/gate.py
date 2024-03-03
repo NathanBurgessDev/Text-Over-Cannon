@@ -8,21 +8,21 @@ class Gate:
         self.back_motor = back_motor
 
     def open_front(self):            
-        self.front_motor.forward(0.5)
+        self.front_motor.forward(0.7)
         sleep(1)
         self.front_motor.stop()
 
     def close_front(self):
-        self.front_motor.backward(0.5)
+        self.front_motor.backward(0.7)
         sleep(1)
         self.front_motor.stop()
 
     def open_back(self):
-        self.back_motor.backward(0.5)
+        self.back_motor.backward(0.7)
         sleep(1)
         self.back_motor.stop()
 
     def close_back(self):
-        self.back_motor.forward(0.5)
+        self.back_motor.forward(0.7)
         sleep(1)
         self.back_motor.stop()
