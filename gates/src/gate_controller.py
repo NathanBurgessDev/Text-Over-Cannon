@@ -17,9 +17,9 @@ class GateController:
                 # get each bit in byte
                 match (byte >> i) & 1:
                     case 0:
-                        self.release_blue()
-                    case 1:
                         self.release_green()
+                    case 1:
+                        self.release_blue()
                 
 
     def release_blue(self):
